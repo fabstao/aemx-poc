@@ -1,13 +1,15 @@
 pipeline {
 agent { label 'slavejdk11' }
 stages {
+/*
  stage("Code Checkout from GitLab") {
   steps {
    git branch: 'dev',
     credentialsId: 'gitlab_access_token',
-    url: 'http://your-ip-here:10080/root/test-project.git'
+    url: 'https://gitlab.rax.latamps.tech/fsalaman/aemxpoc-jdk-pipeline.git'
   }
  }
+ */
    stage('Code Quality Check via SonarQube') {
    steps {
        script {
