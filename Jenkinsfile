@@ -57,9 +57,9 @@ stages {
    steps {
        script {
            sh "cp src/main/docker/Dockerfile.fast-jar ."
+           newImage = docker.build "harbor.rax.latamps.tech/amexpod:${env.BUILD_TAG}"
            }
        }
-    newImage = docker.build "harbor.rax.latamps.tech/amexpod:${env.BUILD_TAG}"
    }
 }
 }
