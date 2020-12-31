@@ -31,11 +31,11 @@ stages {
    stage("Build") {
    steps {
        script{
-           sh "./mvnw compile quarkus:dev"
+           sh "./mvnw package -Dquarkus.package.type=uber-jar"
            }
        }
    }
-   
+
    stage('Code Quality Check via SonarQube') {
    steps {
        script {
