@@ -52,5 +52,13 @@ stages {
            }
        }
    }
+   stage('Prepare code for Docker build') {
+   steps {
+       script {
+           sh "cp src/main/docker/Dockerfile.fast-jar ."
+           }
+        def newImage = docker.build "harbor.rax.latamps.tech/amexpod:${env.BUILD_TAG}"
+       }
+   }
 }
 }
