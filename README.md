@@ -1,6 +1,6 @@
 # Aeromexico MVP Java Pipeline
 
-Basado en OpenJDK - Quarkus, Hibernate y Panache.
+Basado en OpenJDK - Quarkus, Hibernate y Panache. Prueba de DevOps
 
 ## Running the application in dev mode
 
