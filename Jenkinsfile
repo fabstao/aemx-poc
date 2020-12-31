@@ -11,6 +11,31 @@ stages {
  }
  */
  /*
+
+*/
+
+/*
+   stage('Code Quality Check with SonarQube via MVN') {
+   steps {
+       script {
+           sh "./mvnw sonar:sonar \
+                -Dsonar.projectKey=Quarkus-API1 \
+                -Dsonar.host.url=http://aemx-sonarqube.sonarqube:9000 \
+                -Dsonar.login=fe45b80dfef13f97ece883372e45be37b182d4a9"
+           }
+       }
+   }
+   */
+
+   
+   stage("Build") {
+   steps {
+       script{
+           sh "./mvnw compile quarkus:dev"
+           }
+       }
+   }
+   
    stage('Code Quality Check via SonarQube') {
    steps {
        script {
@@ -23,31 +48,6 @@ stages {
            -Dsonar.host.url=http://aemx-sonarqube.sonarqube:9000 \
            -Dsonar.login=fe45b80dfef13f97ece883372e45be37b182d4a9"
                }
-           }
-       }
-   }
-*/
-
-
-   stage('Code Quality Check with SonarQube via MVN') {
-   steps {
-       script {
-       def scannerHome = tool 'scanner';
-           withSonarQubeEnv("SonarScanner") {
-           sh "mvn sonar:sonar \
-                -Dsonar.projectKey=Quarkus-API1 \
-                -Dsonar.host.url=http://aemx-sonarqube.sonarqube:9000 \
-                -Dsonar.login=fe45b80dfef13f97ece883372e45be37b182d4a9"
-               }
-           }
-       }
-   }
-
-   
-   stage("Build") {
-   steps {
-       script{
-           sh "./mvnw compile quarkus:dev"
            }
        }
    }
