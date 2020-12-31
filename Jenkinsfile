@@ -19,7 +19,7 @@ stages {
    stage("Build") {
    steps {
        script{
-           sh "./mvnw package -Dquarkus.package.type=uber-jar"
+           sh "./mvnw package -Dquarkus.package.type=fast-jar"
            }
        }
    }
