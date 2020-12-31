@@ -13,7 +13,7 @@ stages {
    stage('Code Quality Check via SonarQube') {
    steps {
        script {
-       def scannerHome = tool 'sonarqube';
+       def scannerHome = tool 'scanner';
            withSonarQubeEnv("SonarScanner") {
            sh "${tool("scanner")}/bin/sonar-scanner \
            -Dsonar.projectKey=test-node-js \
