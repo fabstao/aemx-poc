@@ -20,7 +20,7 @@ spec:
     workingDir: /home/jenkins
     env:
     - name: DOCKER_CONFIG
-      value: /root/.docker/
+      value: /kaniko/.docker/
     image: gcr.io/kaniko-project/executor:debug
     imagePullPolicy: Always
     command:
