@@ -17,7 +17,7 @@ spec:
     - name: GIT_SSL_NO_VERIFY
       value: true
   - name: kaniko
-    workingDir: /home/jenkins
+    workingDir: /kaniko
     env:
     - name: DOCKER_CONFIG
       value: /kaniko/.docker/
