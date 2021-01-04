@@ -34,7 +34,7 @@ spec:
     projected:
       sources:
       - secret:
-          name: docker-credentials
+          name: harbor-cred
           items:
             - key: .dockerconfigjson
               path: config.json
@@ -93,8 +93,6 @@ stages {
            sh "cp src/main/docker/Dockerfile.fast-jar ./Dockerfile"
            sh "ls -l"
            sh '''#!/busybox/sh
-                 ln -s /kaniko/.docker /root/.docker
-                 ln -s /kaniko/.docker /home/jenkins/.docker
                  /kaniko/executor --context=`pwd` --skip-tls-verify --skip-tls-verify-pull --insecure --insecure-pull --insecure-registry --verbosity=debug --destination=harbor.rax.latamps.tech/aemxmvp/quarkusapp:${BUILD_NUMBER}
            '''
            }
