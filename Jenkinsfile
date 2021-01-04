@@ -88,11 +88,9 @@ stages {
    steps {
      container(name: 'kaniko', shell: '/busybox/sh') {
        script {
-           sh "echo Iniciando construcción del container"
-           sh "pwd"
-           sh "cp src/main/docker/Dockerfile.fast-jar ./Dockerfile"
-           sh "ls -l"
            sh '''#!/busybox/sh
+                 echo Iniciando construcción del container
+                 cp src/main/docker/Dockerfile.fast-jar ./Dockerfile
                  /kaniko/executor --context=`pwd` --skip-tls-verify --skip-tls-verify-pull --insecure --insecure-pull --insecure-registry --verbosity=debug --destination=harbor.rax.latamps.tech/aemxmvp/quarkusapp:${BUILD_NUMBER}
            '''
            }
