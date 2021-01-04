@@ -13,6 +13,9 @@ spec:
   - name: jnlp
     image: jenkins/inbound-agent:latest-jdk11
     workingDir: /home/jenkins
+    env:
+    - name: GIT_SSL_NO_VERIFY
+      value: true
   - name: kaniko
     workingDir: /home/jenkins
     image: gcr.io/kaniko-project/executor:debug
