@@ -87,7 +87,7 @@ stages {
        script {
            sh "cp src/main/docker/Dockerfile.fast-jar ./Dockerfile"
            sh '''#!/busybox/sh
-                 /kaniko/executor --context `pwd` --verbosity debug --destination harbor.rax.latamps.tech/aemxmvp/quarkusapp:${BUILD_NUMBER}
+                 /kaniko/executor --context `pwd` --insecure-skip-tls-verify --verbosity debug --destination harbor.rax.latamps.tech/aemxmvp/quarkusapp:${BUILD_NUMBER}
            '''
            }
       }
