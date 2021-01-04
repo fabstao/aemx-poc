@@ -90,6 +90,8 @@ stages {
        script {
            sh "cp src/main/docker/Dockerfile.fast-jar ./Dockerfile"
            sh '''#!/busybox/sh
+                 cat /kaniko/.docker
+                 echo; pwd; echo
                  /kaniko/executor --context=`pwd` --skip-tls-verify --skip-tls-verify-pull --insecure --insecure-pull --insecure-registry --verbosity=debug --destination=harbor.rax.latamps.tech/aemxmvp/quarkusapp:${BUILD_NUMBER}
            '''
            }
