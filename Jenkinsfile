@@ -1,13 +1,51 @@
 def newImage
 pipeline {
-agent { label 'slavejdk11' }
+agent {
+    kubernetes {
+      label 'aemxfullalpha'
+      yaml """
+kind: Pod
+metadata:
+  name: kaniko
+  namespace: jenkins-mvp
+spec:
+  containers:
+  - name: jnlp
+    image: jenkins/inbound-agent:latest-jdk11
+    workingDir: /home/jenkins
+  - name: kaniko
+    workingDir: /home/jenkins
+    image: gcr.io/kaniko-project/executor:debug
+    imagePullPolicy: Always
+    command:
+    - /busybox/cat
+    tty: true
+    volumeMounts:
+      - name: jenkins-docker-cfg
+        mountPath: /kaniko/.docker
+  volumes:
+  - name: jenkins-docker-cfg
+    projected:
+      sources:
+      - secret:
+          name: docker-credentials
+          items:
+            - key: .dockerconfigjson
+              path: config.json
+"""
+    }
+  }
+
+
 stages {
 /*
  stage("Code Checkout from GitLab") {
   steps {
-   git branch: 'dev',
-    credentialsId: 'gitlab_access_token',
-    url: 'https://gitlab.rax.latamps.tech/fsalaman/aemxpoc-jdk-pipeline.git'
+    container(name: 'jnlp') {
+	   git branch: 'dev',
+		credentialsId: 'gitlab_access_token',
+		url: 'https://gitlab.rax.latamps.tech/fsalaman/aemx-poc-2.git'
+    }
   }
  }
  */
@@ -19,30 +57,14 @@ stages {
    
    stage("Build") {
    steps {
+    container(name: 'jnlp') {
        script{
            sh "./mvnw package -Dquarkus.package.type=fast-jar"
            }
-       }
+      }
+    }
    }
 
- /*
-
-   stage('Code Quality Check via SonarQube') {
-   steps {
-       script {
-       def scannerHome = tool 'scanner';
-           withSonarQubeEnv("SonarScanner") {
-           sh "${tool("scanner")}/bin/sonar-scanner \
-           -Dsonar.projectKey=Quarkus-API1 \
-           -Dsonar.sources=. \
-           #-Dsonar.css.node=. \
-           -Dsonar.host.url=http://aemx-sonarqube.sonarqube:9000 \
-           -Dsonar.login=fe45b80dfef13f97ece883372e45be37b182d4a9"
-               }
-           }
-       }
-   }
-*/
    stage('Code Quality Check with SonarQube via MVN') {
    steps {
        script {
@@ -54,12 +76,19 @@ stages {
        }
    }
    stage('Prepare code for Docker build') {
+   environment {
+     PATH = "/busybox:/kaniko:$PATH"
+   }
    steps {
+     container(name: 'kaniko', shell: '/busybox/sh') {
        script {
-           sh "cp src/main/docker/Dockerfile.fast-jar ."
-           newImage = docker.build "harbor.rax.latamps.tech/amexpod:${env.BUILD_TAG}"
+           sh "cp src/main/docker/Dockerfile.fast-jar ./Dockerfile"
+           sh '''#!/busybox/sh
+                 /kaniko/executor --context `pwd` --verbosity debug --destination harbor.rax.latamps.tech/aemxmvp/quarkusapp:${BUILD_NUMBER}
+           '''
            }
-       }
+      }
+     }
    }
 }
 }
