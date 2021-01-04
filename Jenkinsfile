@@ -17,7 +17,7 @@ spec:
     - name: GIT_SSL_NO_VERIFY
       value: true
   - name: kaniko
-    workingDir: /kaniko
+    workingDir: /home/jenkins
     env:
     - name: DOCKER_CONFIG
       value: /kaniko/.docker/
@@ -93,6 +93,8 @@ stages {
            sh "cp src/main/docker/Dockerfile.fast-jar ./Dockerfile"
            sh "ls -l"
            sh '''#!/busybox/sh
+                 ln -s /kaniko/.docker /root/.docker
+                 ln -s /kaniko/.docker /home/jenkins/.docker
                  /kaniko/executor --context=`pwd` --skip-tls-verify --skip-tls-verify-pull --insecure --insecure-pull --insecure-registry --verbosity=debug --destination=harbor.rax.latamps.tech/aemxmvp/quarkusapp:${BUILD_NUMBER}
            '''
            }
