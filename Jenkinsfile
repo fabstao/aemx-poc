@@ -78,7 +78,7 @@ stages {
            }
        }
    }
-   stage('Prepare code for Docker build') {
+   stage('Kaniko - container build') {
    environment {
      PATH = "/busybox:/kaniko:$PATH"
    }
