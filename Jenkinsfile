@@ -65,7 +65,7 @@ stages {
    steps {
     container(name: 'jnlp') {
        script{
-           sh "./mvnw package -Dquarkus.package.type=fast-jar"
+           sh "./mvnw package -Dquarkus.package.type=uber-jar"
            }
       }
     }
