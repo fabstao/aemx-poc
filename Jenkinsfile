@@ -90,7 +90,7 @@ stages {
        script {
            sh '''#!/busybox/sh
                  echo Iniciando construcción del container
-                 cp src/main/docker/Dockerfile.fast-jar ./Dockerfile
+                 cp src/main/docker/Dockerfile.uber-jar ./Dockerfile
                  /kaniko/executor --context=`pwd` --skip-tls-verify --skip-tls-verify-pull --insecure --insecure-pull --insecure-registry --verbosity=debug --destination=harbor.rax.latamps.tech/aemxmvp/quarkusapp:${BUILD_NUMBER}
            '''
            }
