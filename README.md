@@ -4,13 +4,6 @@
 
 Basado en OpenJDK - Quarkus, Hibernate y Panache. Prueba de DevOps.
 
-## Running the application in dev mode
-
-You can run your application in dev mode that enables live coding using:
-```shell script
-./mvnw compile quarkus:dev
-```
-
 ## Packaging and running the application
 
 Se usará UBER-JAR en este caso.
