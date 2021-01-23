@@ -1,6 +1,6 @@
 # Aeromexico MVP Java Pipeline
 
-[![Build Status](https://jenkins-mvp.rax.latamps.tech/buildStatus/icon?job=Kaniko-test-1%2Fdev)](https://jenkins-mvp.rax.latamps.tech/job/Kaniko-test-1/job/dev/)
+[![Build Status](https://jenkins-mvp.rax.latamps.tech/buildStatus/icon?job=java-mvn-quarkus-1%2Fdev)](https://jenkins-mvp.rax.latamps.tech/job/Kaniko-test-1/job/dev/)
 
 
 Basado en OpenJDK - Quarkus, Hibernate y Panache. Prueba de DevOps.
