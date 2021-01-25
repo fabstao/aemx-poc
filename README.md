@@ -49,8 +49,11 @@ https://www.rackspace.com
 TOKEN 2:  e855f732e84feebee515e78a7511be8a1d5b9e6f
 
 ```
-mvn sonar:sonar \
-  -Dsonar.projectKey=rax.latamps.tech:aemx-poc-2 \
-  -Dsonar.host.url=http://sonar.rax.latamps.tech \
-  -Dsonar.login=e855f732e84feebee515e78a7511be8a1d5b9e6f
+
+./mvnw sonar:sonar \
+               -Dsonar.projectKey=rax.latamps.tech:aemx-poc-2 \
+               -Dsonar.host.url=http://aemx-sonarqube.sonarqube8:9000 \
+               -Dsonar.verbose=true \
+               -Dsonar.login=4fec561eb42f924a0514c525ddf38a4afb35e4e5
+
 ```
