@@ -45,3 +45,12 @@ If you want to learn more about building native executables, please consult http
 Guide: https://quarkus.io/guides/rest-json
 
 https://www.rackspace.com 
+
+TOKEN 2:  e855f732e84feebee515e78a7511be8a1d5b9e6f
+
+```
+mvn sonar:sonar \
+  -Dsonar.projectKey=rax.latamps.tech:aemx-poc-2 \
+  -Dsonar.host.url=http://sonar.rax.latamps.tech \
+  -Dsonar.login=e855f732e84feebee515e78a7511be8a1d5b9e6f
+```
