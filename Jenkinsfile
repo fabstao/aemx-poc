@@ -80,9 +80,9 @@ stages {
            //      -Dsonar.login=fe45b80dfef13f97ece883372e45be37b182d4a9"
            sh "./mvnw sonar:sonar \
                -Dsonar.projectKey=rax.latamps.tech:aemx-poc-2 \
-               -Dsonar.host.url=http://xxxaemx-sonarqube.sonarqube:9000 \
+               -Dsonar.host.url=http://aemx-sonarqube.sonarqube8:9000 \
                -Dsonar.verbose=true \
-               -Dsonar.login=e855f732e84feebee515e78a7511be8a1d5b9e6f"
+               -Dsonar.login=4fec561eb42f924a0514c525ddf38a4afb35e4e5
            }
        }
    }
