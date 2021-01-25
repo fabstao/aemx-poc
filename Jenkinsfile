@@ -82,7 +82,7 @@ stages {
                -Dsonar.projectKey=rax.latamps.tech:aemx-poc-2 \
                -Dsonar.host.url=http://aemx-sonarqube.sonarqube8:9000 \
                -Dsonar.verbose=true \
-               -Dsonar.login=4fec561eb42f924a0514c525ddf38a4afb35e4e5
+               -Dsonar.login=4fec561eb42f924a0514c525ddf38a4afb35e4e5"
            }
        }
    }
