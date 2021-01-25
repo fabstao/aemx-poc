@@ -38,7 +38,7 @@ You can then execute your native executable with: `./target/aemxpoc-jdk-pipeline
 
 If you want to learn more about building native executables, please consult https://quarkus.io/guides/maven-tooling.html.
 
-# RESTEasy JAX-RS
+## RESTEasy JAX-RS
 
 <p>Un endpoint RESTEasy básico para probar flujo de CI/CD</p>
 
@@ -47,6 +47,10 @@ Guide: https://quarkus.io/guides/rest-json
 https://www.rackspace.com 
 
 TOKEN 2:  e855f732e84feebee515e78a7511be8a1d5b9e6f
+
+## Apéndice Técnico
+
+Code scanning:
 
 ```
 
