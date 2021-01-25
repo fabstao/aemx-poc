@@ -2,7 +2,7 @@
 
 [![Build Status](https://jenkins-mvp.rax.latamps.tech/buildStatus/icon?job=java-mvn-quarkus-1%2Fdev)](https://jenkins-mvp.rax.latamps.tech/job/Kaniko-test-1/job/dev/)
 
-Basado en OpenJDK - Quarkus, Hibernate y Panache. Prueba de DevOps. Next build
+Basado en OpenJDK - Quarkus, Hibernate y Panache. Prueba de DevOps. 
 
 ## Packaging and running the application
 
