@@ -4,6 +4,16 @@
 
 Basado en OpenJDK - Quarkus, Hibernate y Panache. Prueba de DevOps. 
 
+## RESTEasy JAX-RS
+
+<p>Un endpoint RESTEasy básico para probar flujo de CI/CD</p>
+
+Guide: https://quarkus.io/guides/rest-json
+
+https://www.rackspace.com 
+
+TOKEN 2:  e855f732e84feebee515e78a7511be8a1d5b9e6f
+
 ## Packaging and running the application
 
 Se usará UBER-JAR en este caso.
@@ -37,16 +47,6 @@ Or, if you don't have GraalVM installed, you can run the native executable build
 You can then execute your native executable with: `./target/aemxpoc-jdk-pipeline-1.0.0-SNAPSHOT-runner`
 
 If you want to learn more about building native executables, please consult https://quarkus.io/guides/maven-tooling.html.
-
-## RESTEasy JAX-RS
-
-<p>Un endpoint RESTEasy básico para probar flujo de CI/CD</p>
-
-Guide: https://quarkus.io/guides/rest-json
-
-https://www.rackspace.com 
-
-TOKEN 2:  e855f732e84feebee515e78a7511be8a1d5b9e6f
 
 ## Apéndice Técnico
 
