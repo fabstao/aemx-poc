@@ -15,7 +15,7 @@ public class GreetingResourceTest {
           .when().get("/aemx")
           .then()
              .statusCode(200)
-             .body(is("Aeromexico DevOps"));
+             .body(is("Aeromexico DevOps Canary v2"));
     }
 
 }
