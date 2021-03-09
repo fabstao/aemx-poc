@@ -1,7 +1,7 @@
 def newImage
 pipeline {
 agent {
-    kubernetes {
+    kubernetes-qa {
       label 'aemxfullalpha'
       yaml """
 kind: Pod
