@@ -74,15 +74,10 @@ stages {
    stage('Code Quality Check with SonarQube via MVN') {
    steps {
        script {
-           // sh "./mvnw sonar:sonar \
-           //      -Dsonar.projectKey=Quarkus-API1 \
-           //      -Dsonar.host.url=http://aemx-sonarqube.sonarqube:9000 \
-           //      -Dsonar.login=fe45b80dfef13f97ece883372e45be37b182d4a9"
-           sh "./mvnw sonar:sonar \
-               -Dsonar.projectKey=rax.latamps.tech:aemx-poc-2 \
-               -Dsonar.host.url=http://aemx-sonarqube.sonarqube8:9000 \
-               -Dsonar.verbose=true \
-               -Dsonar.login=4fec561eb42f924a0514c525ddf38a4afb35e4e5"
+           sh "mvn sonar:sonar \
+			  -Dsonar.projectKey=cidemo \
+			  -Dsonar.host.url=https://sonar.aero-phoenix.com \
+			  -Dsonar.login=b1a337e2c64d068dc3db253fc6306e84d7281d9a"
            }
        }
    }
