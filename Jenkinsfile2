@@ -38,30 +38,25 @@ spec:
 
     node(POD_LABEL) {
 		stage("Build") {
-		steps {
 		  container(name: 'jnlp') {
 			 script{
 				 sh "./mvnw package -Dquarkus.package.type=uber-jar"
 				 }
 			 }
-		  }
 		}
 
 		stage('Code Quality Check with SonarQube via MVN') {
-		  steps {
 			 script {
 				 sh "mvn sonar:sonar \
 				  -Dsonar.projectKey=cidemo \
 				  -Dsonar.host.url=https://sonar.aero-phoenix.com \
 				  -Dsonar.login=b1a337e2c64d068dc3db253fc6306e84d7281d9a"
 			   }
-			 }
 		}
 		stage('Kaniko - container build') {
 		  environment {
 		   PATH = "/busybox:/kaniko:$PATH"
 		 }
-		  steps {
 		   container(name: 'kaniko', shell: '/busybox/sh') {
 			 script {
 				 sh '''#!/busybox/sh
@@ -71,7 +66,6 @@ spec:
 				 '''
 				 }
 			}
-		  }
 		}
   }
 }
