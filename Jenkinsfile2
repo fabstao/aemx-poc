@@ -1,6 +1,4 @@
-def newImage
-pipeline {
-  podTemplate(cloud: "kubernetes-qa", yaml: """\
+podTemplate(cloud: "kubernetes-qa", yaml: """\
 apiVersion: v1
 kind: Pod
 metadata:
@@ -76,5 +74,4 @@ spec:
 		  }
 		}
   }
-}
 }
