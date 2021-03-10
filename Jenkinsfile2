@@ -1,0 +1,80 @@
+def newImage
+pipeline {
+  podTemplate(cloud: "kubernetes-qa", yaml: """\
+apiVersion: v1
+kind: Pod
+metadata:
+  name: kaniko
+  namespace: jenkins
+spec:
+  containers:
+  - name: jnlp
+    image: jenkins/inbound-agent:latest-jdk11
+    workingDir: /home/jenkins
+    env:
+    - name: GIT_SSL_NO_VERIFY
+      value: true
+  - name: kaniko
+    workingDir: /home/jenkins
+    env:
+    - name: DOCKER_CONFIG
+      value: /kaniko/.docker/
+    image: gcr.io/kaniko-project/executor:debug
+    imagePullPolicy: Always
+    command:
+    - /busybox/cat
+    tty: true
+    volumeMounts:
+      - name: jenkins-docker-cfg
+        mountPath: /kaniko/.docker
+  volumes:
+  - name: jenkins-docker-cfg
+    projected:
+      sources:
+      - secret:
+          name: harbor-cred
+          items:
+            - key: .dockerconfigjson
+              path: config.json
+""") {
+
+    node(POD_LABEL) {
+		stage("Build") {
+		steps {
+		  container(name: 'jnlp') {
+			 script{
+				 sh "./mvnw package -Dquarkus.package.type=uber-jar"
+				 }
+			 }
+		  }
+		}
+
+		stage('Code Quality Check with SonarQube via MVN') {
+		  steps {
+			 script {
+				 sh "mvn sonar:sonar \
+				  -Dsonar.projectKey=cidemo \
+				  -Dsonar.host.url=https://sonar.aero-phoenix.com \
+				  -Dsonar.login=b1a337e2c64d068dc3db253fc6306e84d7281d9a"
+			   }
+			 }
+		}
+		stage('Kaniko - container build') {
+		  environment {
+		   PATH = "/busybox:/kaniko:$PATH"
+		 }
+		  steps {
+		   container(name: 'kaniko', shell: '/busybox/sh') {
+			 script {
+				 sh '''#!/busybox/sh
+					   echo Iniciando construcción del container
+					   cp src/main/docker/Dockerfile.uber-jar ./Dockerfile
+					   /kaniko/executor --context=`pwd` --skip-tls-verify --skip-tls-verify-pull --insecure --insecure-pull --insecure-registry --verbosity=debug --destination=harbor.aero-phoenix.com/phoenix/quarkusapp:${BUILD_NUMBER}
+				 '''
+				 }
+			}
+		  }
+		}
+  }
+}
+}

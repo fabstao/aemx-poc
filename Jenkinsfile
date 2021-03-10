@@ -2,7 +2,7 @@ def newImage
 pipeline {
 agent {
     kubernetes-qa {
-      label 'aemxfullalpha'
+      label 'ciftest'
       yaml """
 kind: Pod
 metadata:
