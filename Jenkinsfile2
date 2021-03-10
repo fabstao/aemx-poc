@@ -48,7 +48,7 @@ spec:
 
 		stage('Code Quality Check with SonarQube via MVN') {
 			 script {
-				 sh "mvn sonar:sonar \
+				 sh "./mvnw sonar:sonar \
 				  -Dsonar.projectKey=cidemo \
 				  -Dsonar.host.url=https://sonar.aero-phoenix.com \
 				  -Dsonar.login=b1a337e2c64d068dc3db253fc6306e84d7281d9a"
