@@ -48,11 +48,9 @@ spec:
 
 		stage('Code Quality Check with SonarQube via MVN') {
 			 script {
-                 sh "curl -k https://harbor.aero-phoenix.com | head -10"
-                 sh "curl -k https://sonar.aero-phoenix.com | head -10"
 				 sh "./mvnw sonar:sonar \
 				  -Dsonar.projectKey=cidemo \
-				  -Dsonar.host.url=https://sonar.aero-phoenix.com \
+				  -Dsonar.host.url=http://sonarqube-sonarqube.sonarqube:9000 \
 				  -Dsonar.login=b1a337e2c64d068dc3db253fc6306e84d7281d9a"
 			   }
 		}
